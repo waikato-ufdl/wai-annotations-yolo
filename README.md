@@ -63,3 +63,4 @@ Writes image object-detection annotations in the YOLO format
                         the names to use for the splits
         --split-ratios RATIO [RATIO ...]
                         the ratios to use for the splits
+```
