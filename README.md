@@ -1,6 +1,10 @@
 # wai-annotations-yolo
 wai.annotations module for managing YOLO datasets. 
 
+The manual is available here:
+
+https://ufdl.cms.waikato.ac.nz/wai-annotations-manual/
+
 ## Plugins
 ### FROM-YOLO-OD
 Reads image object-detection annotations in the YOLO format
