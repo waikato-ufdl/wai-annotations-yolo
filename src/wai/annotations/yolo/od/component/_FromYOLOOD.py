@@ -66,7 +66,7 @@ class FromYOLOOD(
 
         # Read and parse the labels file
         with open(self.labels_file, "r") as labels_file:
-            return labels_file.read().split(",")
+            return [x.strip() for x in labels_file.read().split(",")]
 
     def to_located_object(self, object: YOLOObject, *, image_width: int, image_height: int) -> LocatedObject:
         """
