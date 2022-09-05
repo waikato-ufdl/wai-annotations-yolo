@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.1 (????-??-??)
+1.0.1 (2022-09-05)
 ------------------
 
 - the `read_labels_file` method of `FromYOLOOD` now strips leading/trailing whitespaces
