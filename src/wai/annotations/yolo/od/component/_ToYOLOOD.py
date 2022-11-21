@@ -8,7 +8,7 @@ from wai.annotations.domain.image.object_detection import ImageObjectDetectionIn
 from wai.annotations.domain.image.object_detection.util import get_object_label
 
 from wai.common.adams.imaging.locateobjects import LocatedObject
-from wai.common.cli.options import TypedOption
+from wai.common.cli.options import TypedOption, FlagOption
 
 from .._format import YOLOODFormat, YOLOObject
 
@@ -33,6 +33,12 @@ class ToYOLOOD(
         type=str,
         metavar="PATH",
         help="Path to the labels CSV file to write"
+    )
+
+    # whether to output polygon format rather than bbox one
+    use_polygon_format: Optional[bool] = FlagOption(
+        "-p", "--use-polygon-format",
+        help="Outputs the annotations in polygon format rather than bbox one."
     )
 
     # Label-index mapping accumulator
@@ -88,10 +94,25 @@ class ToYOLOOD(
             self.labels[label] = len(self.labels)
         class_index = self.labels[label]
 
+        px = None
+        py = None
+        if self.use_polygon_format:
+            if located_object.has_polygon():
+                px = located_object.get_polygon_x()
+                py = located_object.get_polygon_y()
+            else:
+                l = located_object
+                px = [l.x, l.x + l.width - 1, l.x + l.width - 1, l.x]
+                py = [l.y, l.y, l.y + l.height - 1, l.y + l.height - 1]
+            px = [x / image_width for x in px]
+            py = [y / image_height for y in py]
+
         return YOLOObject(
             class_index,
             (located_object.x + located_object.width / 2) / image_width,
             (located_object.y + located_object.height / 2) / image_height,
             located_object.width / image_width,
-            located_object.height / image_height
+            located_object.height / image_height,
+            px,
+            py,
         )

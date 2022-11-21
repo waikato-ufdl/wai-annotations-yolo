@@ -9,6 +9,7 @@ from wai.annotations.domain.image.object_detection.util import set_object_label
 
 from wai.common.adams.imaging.locateobjects import LocatedObjects, LocatedObject
 from wai.common.cli.options import TypedOption
+from wai.common.geometry import Polygon, Point
 
 from .._format import YOLOODFormat, YOLOObject
 
@@ -89,5 +90,12 @@ class FromYOLOOD(
         # Create the located object
         located_object = LocatedObject(x_min, y_min, width, height)
         set_object_label(located_object, label)
+
+        # polygon information?
+        if object.has_polygon():
+            points = []
+            for i in range(len(object.poly_x)):
+                points.append(Point(round(object.poly_x[i] * image_width), round(object.poly_y[i] * image_height)))
+            located_object.set_polygon(Polygon(*points))
 
         return located_object

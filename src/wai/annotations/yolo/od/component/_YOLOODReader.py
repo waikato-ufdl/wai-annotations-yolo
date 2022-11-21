@@ -59,6 +59,10 @@ class YOLOODReader(AnnotationFileProcessor[YOLOODFormat]):
             os.path.join(image_path, basename)
         )
 
+        if image_filename is None:
+            self.logger.warning("Failed to locate image for: %s" % filename)
+            return
+
         # Read the YOLO annotations
         objects = []
         with open(filename, "r") as file:

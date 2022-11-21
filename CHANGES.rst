@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.0.2 (????-??-??)
+------------------
+
+- supports polygon format now (index + pairs of normalized x/y coordinates)
+- `YOLOODReader` now skips annotations if it fails to locate associated image
+
+
 1.0.1 (2022-09-05)
 ------------------
 
