@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.2 (????-??-??)
+1.0.2 (2022-11-23)
 ------------------
 
 - supports polygon format now (index + pairs of normalized x/y coordinates)

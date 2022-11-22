@@ -45,26 +45,26 @@ Writes image object-detection annotations in the YOLO format
 #### Domain(s):
 - **Image Object-Detection Domain**
 
-### Options:
+#### Options:
 ```
-    TO-YOLO-OD:
-      Writes image object-detection annotations in the YOLO format
+usage: to-yolo-od [-c PATH] [-l PATH] [-p] [--annotations-only] [--no-interleave] -o PATH
+                  [--split-names SPLIT NAME [SPLIT NAME ...]] [--split-ratios RATIO [RATIO ...]]
 
-      Domain(s): Image Object-Detection Domain
-
-      usage: to-yolo-od [-c PATH] [-l PATH] [--annotations-only] -o PATH [--split-names SPLIT NAME [SPLIT NAME ...]] [--split-ratios RATIO [RATIO ...]]
-
-      optional arguments:
-        -c PATH, --labels-csv PATH
-                        Path to the labels CSV file to write
-        -l PATH, --labels PATH
-                        Path to the labels file to write
-        --annotations-only
-                        skip the writing of data files, outputting only the annotation files
-        -o PATH, --output PATH
-                        output directory to write images and annotations to
-        --split-names SPLIT NAME [SPLIT NAME ...]
-                        the names to use for the splits
-        --split-ratios RATIO [RATIO ...]
-                        the ratios to use for the splits
+optional arguments:
+  -c PATH, --labels-csv PATH
+                        Path to the labels CSV file to write (default: None)
+  -l PATH, --labels PATH
+                        Path to the labels file to write (default: None)
+  -p, --use-polygon-format
+                        Outputs the annotations in polygon format rather than bbox one. (default:
+                        False)
+  --annotations-only    skip the writing of data files, outputting only the annotation files
+                        (default: False)
+  --no-interleave       disables item interleaving (splitting will occur in runs) (default: False)
+  -o PATH, --output PATH
+                        output directory to write images and annotations to (default: None)
+  --split-names SPLIT NAME [SPLIT NAME ...]
+                        the names to use for the splits (default: [])
+  --split-ratios RATIO [RATIO ...]
+                        the ratios to use for the splits (default: [])
 ```
