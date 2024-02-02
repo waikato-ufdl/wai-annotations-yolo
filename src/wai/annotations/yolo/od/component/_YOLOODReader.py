@@ -6,7 +6,7 @@ from wai.annotations.core.stream import ThenFunction
 from wai.annotations.domain.image import Image
 from wai.annotations.domain.image.util import get_associated_image
 
-from wai.common.cli.options import TypedOption
+from wai.common.cli.options import TypedOption, FlagOption
 
 from .._format import YOLOODFormat, YOLOObject
 
@@ -21,6 +21,12 @@ class YOLOODReader(AnnotationFileProcessor[YOLOODFormat]):
         type=str,
         metavar="PATH",
         help="Relative path to image files from annotations"
+    )
+
+    # whether to output polygon format rather than bbox one
+    use_polygon_format: Optional[bool] = FlagOption(
+        "-p", "--use-polygon-format",
+        help="Reads the annotations in polygon format rather than using auto-detection of bbox or polygon format."
     )
 
     def read_annotation_file(
@@ -67,7 +73,7 @@ class YOLOODReader(AnnotationFileProcessor[YOLOODFormat]):
         objects = []
         with open(filename, "r") as file:
             for line in file.readlines():
-                objects.append(YOLOObject.from_string(line))
+                objects.append(YOLOObject.from_string(line, use_polygon_format=self.use_polygon_format))
 
         # Read the image
         image = Image.from_file(image_filename)

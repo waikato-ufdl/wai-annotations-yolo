@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.0.3 (????-??-??)
+------------------
+
+- polygon-format can be explicitly enforced rather than auto-detected
+  using the `--use-polygon-format` option when reading annotations
+  using `from-yolo-od`
+
+
 1.0.2 (2022-11-23)
 ------------------
 

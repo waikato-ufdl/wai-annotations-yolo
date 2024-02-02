@@ -18,29 +18,20 @@ class YOLOObject:
     poly_y: list = None
 
     @classmethod
-    def from_string(cls, string: str):
+    def from_string(cls, string: str, use_polygon_format: bool = False):
         """
         Attempts to parse the given string.
 
         :param string: the string to parse
         :type string: str
+        :param use_polygon_format: whether to force polygon format or use auto-detection
+        :type use_polygon_format: bool
         :return: the YOLOObject or an exception if failed to parse
         :rtype: YOLOObject
         """
         parts = string.strip().split(" ")
-        # bbox format: <index> <center_x> <center_y> <widht> <height>
-        if len(parts) == 5:
-            return cls(
-                int(parts[0]),
-                float(parts[1]),
-                float(parts[2]),
-                float(parts[3]),
-                float(parts[4]),
-                None,
-                None,
-            )
         # polygon format: <index> <x0> <y0> <x1> <y1> ...
-        elif (len(parts) > 5) and (len(parts) % 2 == 1):
+        if (use_polygon_format or (len(parts) > 5)) and (len(parts) % 2 == 1):
             px = []
             py = []
             for i in range(1, len(parts), 2):
@@ -56,6 +47,17 @@ class YOLOObject:
                 h,
                 px,
                 py,
+            )
+        # bbox format: <index> <center_x> <center_y> <widht> <height>
+        elif len(parts) == 5:
+            return cls(
+                int(parts[0]),
+                float(parts[1]),
+                float(parts[2]),
+                float(parts[3]),
+                float(parts[4]),
+                None,
+                None,
             )
         else:
             raise Exception("Neither in bbox nor polygon format: %s" % string)

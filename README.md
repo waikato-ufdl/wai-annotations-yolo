@@ -14,29 +14,28 @@ Reads image object-detection annotations in the YOLO format
 
 #### Options:
 ```
-    FROM-YOLO-OD:
-      Reads image object-detection annotations in the YOLO format
+usage: from-yolo-od [-I FILENAME] [-i FILENAME] [-N FILENAME] [-n FILENAME] [-o FILENAME]
+                    [--seed SEED] [--image-path-rel PATH] [-p] [-l PATH]
 
-      Domain(s): Image Object-Detection Domain
-
-      usage: from-yolo-od [-I FILENAME] [-i FILENAME] [-N FILENAME] [-n FILENAME] [-o FILENAME] [--seed SEED] [--image-path-rel PATH] [-l PATH]
-
-      optional arguments:
-        -I FILENAME, --inputs-file FILENAME
-                        Files containing lists of input files (can use glob syntax)
-        -i FILENAME, --input FILENAME
-                        Input files (can use glob syntax)
-        -N FILENAME, --negatives-file FILENAME
-                        Files containing lists of negative files (can use glob syntax)
-        -n FILENAME, --negative FILENAME
-                        Files that have no annotations (can use glob syntax)
-        -o FILENAME, --output-file FILENAME
-                        optional file to write read filenames into
-        --seed SEED     the seed to use for randomisation
-        --image-path-rel PATH
-                        Relative path to image files from annotations
-        -l PATH, --labels PATH
-                        Path to the labels file
+optional arguments:
+  -I FILENAME, --inputs-file FILENAME
+                        Files containing lists of input files (can use glob syntax) (default: [])
+  -i FILENAME, --input FILENAME
+                        Input files (can use glob syntax) (default: [])
+  -N FILENAME, --negatives-file FILENAME
+                        Files containing lists of negative files (can use glob syntax) (default: [])
+  -n FILENAME, --negative FILENAME
+                        Files that have no annotations (can use glob syntax) (default: [])
+  -o FILENAME, --output-file FILENAME
+                        optional file to write read filenames into (default: None)
+  --seed SEED           the seed to use for randomisation (default: None)
+  --image-path-rel PATH
+                        Relative path to image files from annotations (default: None)
+  -p, --use-polygon-format
+                        Reads the annotations in polygon format rather than using auto-detection of
+                        bbox or polygon format. (default: False)
+  -l PATH, --labels PATH
+                        Path to the labels file (default: None)
 ```
 
 ### TO-YOLO-OD
